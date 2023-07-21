@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz app</title>
+    <link rel="stylesheet" href="landingStyle.css" />
+  </head>
+  <body>
+    <div class="container">
+      <span id="span1"></span>
+      <div class="heading">
+        <h2>Welcome &nbsp;</h2>
+        <h2 id="head"></h2>
+      </div>
+      <div class="heading">
+        <h3 id="p0"></h3>
+        &nbsp;&nbsp;
+        <p id="p1"></p>
+      </div>
+      <button onclick="yes()">YES</button>
+      <button onclick="no()">NO</button>
+
+      <h4 id="score"></h4>
+      <h4 onclick="reset()" class="reset">🔄</h4>
+    </div>
+
+    <script>
+      window.onload = function () {
+        var val = localStorage.getItem("value");
+        var output = document.getElementById("head");
+        output.innerHTML = val;
+      };
+
+
+      var questions = [
+        "Java supports inheritance",
+        "Java is Object oriented programming language",
+        "Spring is java framework",
+        "We can use Java instead of css",
+        "React.js is javascript framework",
+        "css is used for programming language",
+        "html used for backend",
+        "mysql used at server side",
+        "Java introduce by james gosling",
+        "We can't use java for web devolpment",
+      ];
+      var answers = [
+        true,
+        true,
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        true,
+        false,
+      ];
+
+      var index = 0;
+      var score = 0;
+      var qno = 1;
+      var result = 0;
+      var qns = document.getElementById("p1");
+      var qnums = document.getElementById("p0");
+      var score = document.getElementById("score");
+      var span1 = document.getElementById("span1");
+      qns.innerHTML = questions[index];
+      qnums.innerHTML = "Q." + qno;
+      score.innerHTML = " Your score is " + result;
+
+      function yes() {
+        if (index <= questions.length) {
+          if (answers[index] == true) {
+            result++;
+            score.innerHTML = "your score is " + result;
+          }
+          index++;
+          qno++;
+          if (index <= questions.length - 1) {
+            qnums.innerHTML = "Q." + qno;
+            qns.innerHTML = questions[index];
+          } else {
+            span1.innerHTML = "Your score is " + result;
+            document.getElementById("span1").style.color = "green";
+          }
+        } else {
+          span1.innerHTML = "You reached at end press reset";
+          document.getElementById("span1").style.color = "red";
+        }
+      }
+
+      function no() {
+        if (index <= questions.length) {
+          if (answers[index] == false) {
+            result++;
+            score.innerHTML = "your score is " + result;
+          }
+          index++;
+          qno++;
+          if (index <= questions.length - 1) {
+            qnums.innerHTML = "Q." + qno;
+            qns.innerHTML = questions[index];
+          } else {
+            span1.innerHTML = "Your score is " + result;
+            document.getElementById("span1").style.color = "green";
+          }
+        } else {
+          span1.innerHTML = "You reached at end press reset ";
+          document.getElementById("span1").style.color = "red";
+        }
+      }
+
+      function reset() {
+        index = 0;
+        qno = 1;
+        result = 0;
+        score.innerHTML = "Your score is " + result;
+        qns.innerHTML = questions[index];
+        qnums.innerHTML = "Q." + qno;
+        span1.innerHTML = "";
+      }
+
+    </script>
+  </body>
+</html>
